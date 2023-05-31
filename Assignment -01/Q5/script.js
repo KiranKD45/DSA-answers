@@ -25,3 +25,6 @@ var merge = function(nums1, m, nums2, n) {
    }
  }
 };
+
+// Time complexity :O(n) 
+// space complexity :O(n)

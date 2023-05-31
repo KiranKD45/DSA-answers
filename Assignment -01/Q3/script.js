@@ -29,3 +29,7 @@ var searchInsert = function(nums, target) {
     
     return ans;
 };
+
+
+// Time complexity :O(logn) 
+// space complexity :O(1)

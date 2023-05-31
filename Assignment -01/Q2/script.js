@@ -20,3 +20,6 @@ var removeElement = function(nums, val) {
    }
    return nums.length;
 };
+
+// Time complexity :O(n) 
+// space complexity :O(n)

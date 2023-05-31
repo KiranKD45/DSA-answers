@@ -19,3 +19,5 @@ var plusOne = function(digits) {
     return value.toString().split('');
 };
 
+// Time complexity :O(n) 
+// space complexity :O(1)
