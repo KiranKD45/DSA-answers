@@ -1,29 +1,61 @@
-var findDuplicate = function(nums) {
-    
-    if(nums.length === 0 || nums === null) return 0;
-    
-    let left = 1;
-    let right = nums.length -1;
-    
-    while(left < right){
-        
-        const mid = Math.floor(left + (right-left)/2);
-        
-        let count = 0;
-        
-        for(let i=0; i < nums.length; i++){
-            if(nums[i] <= mid) count++
-        }
-        
-        
-        if(count > mid){
-            right = mid;
-        }else{
-            left = mid +1;
-        }
-        
-        count = 0;
+class Node
+{
+    constructor(d)
+    {
+        this.data = d;
+        this.next = null;
     }
-    
-    return left
-};
+}
+ 
+let head;
+function kAltReverse(node, k)
+{
+    let current = node;
+    let next = null, prev = null;
+    let count = 0;
+ 
+    while (current != null && count < k)
+    {
+        next = current.next;
+        current.next = prev;
+        prev = current;
+        current = next;
+        count++;
+    }
+
+    if (node != null)
+    {
+        node.next = current;
+    }
+ 
+
+    count = 0;
+    while (count < k - 1 && current != null)
+    {
+        current = current.next;
+        count++;
+    }
+
+    if (current != null)
+    {
+        current.next = kAltReverse(current.next, k);
+    }
+
+    return prev;
+}
+ 
+function printList(node)
+{
+    while (node != null)
+    {
+        document.write(node.data + " ");
+        node = node.next;
+    }
+}
+ 
+function push(newdata)
+{
+    let mynode = new Node(newdata);
+    mynode.next = head;
+    head = mynode;
+}
