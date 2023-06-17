@@ -1,18 +1,24 @@
-const findMin = (a) => {
-	if (!a || a.length === 0) return null;
+var rotateRight = function(head, k) {
 
-	let left = 0,
-		right = a.length - 1;
-
-	while (left < right) {
-		let mid = (left + (right - left) / 2) | 0; // This helps avoid overflows with large data sets
-		
-		// The one instance I mentioned above
-		if (mid > 0 && a[mid - 1] > a[mid]) return a[mid];
-		else if (a[mid] >= a[left] && a[mid] < a[right]) right = mid - 1;
-		else if (a[mid] >= a[left] && a[mid] > a[right]) left = mid + 1;
-		else if (a[mid] < a[left] && a[mid] < a[right]) right = mid - 1;
+	if(!head || !head.next || k===0) return head;
+	let tail = head;
+	let len = 1
+	while(tail.next){
+		tail= tail.next;
+		len++;
 	}
-
-	return a[left];
-};
+	
+	k=k%len;
+	let prev=null;
+	let temp = head;
+	let count = 1;
+	while(count <= len-k){
+		prev=temp;
+		temp=temp.next;
+		count++;
+	}
+	if(!prev || !temp) return head;
+	prev.next=null;
+	tail.next= head;
+	return temp;  
+	};

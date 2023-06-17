@@ -1,18 +1,41 @@
-var mySqrt = function(x) {
-    if(x == 1 || x == 0) {
-        return x;
+class Node{
+    constructor(data){
+        this.data = data;
+        this.next = null;
     }
-    let low = 1, high = parseInt(x/2)+1, mid;
-    while (low <= high) {
-        mid = low + parseInt((high-low)/2);
+}
+class Solution {
+    removeLoop(head)
+    {
+        let fast = head.next;
+        let slow = head;
         
-        if (mid * mid == x) {
-            return mid;
-        } else if (mid * mid < x) {
-            low = mid + 1;
-        } else {
-            high = mid-1;
+        while( fast !== slow )
+        {
+            if( fast === null || fast.next === null ) 
+            return;
+            
+            fast = fast.next.next;
+            slow = slow.next;
         }
+        let size = 1;
+        fast = fast.next;
+        while( fast !== slow )
+        {
+            fast = fast.next;
+            size++;
+        }
+        slow = head;
+        fast = head;
+        for(let i=0; i<size-1; i++)
+            fast = fast.next;
+            
+        while( fast.next != slow )
+        {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        fast.next = null;
     }
-    return low - 1;
+    
 }

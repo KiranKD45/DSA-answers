@@ -1,11 +1,28 @@
-var intersect = function(nums1, nums2) {
-    var output=[]
-    for(let i=0;i<nums1.length;i++){
-        if(nums2.includes(nums1[i])){
-            output.push(nums1[i])
-            nums2.splice(nums2.indexOf(nums1[i]),1)
-        }
+var removeZeroSumSublists = function(head) {
+    if (!head) {
+        return head;
     }
-    return output;
+    let dummy = new ListNode(0);
+    dummy.next = head;
+
+    let curr = dummy 
+    let prefixSumMap = new Map(); 
+    let runningSum = 0; 
+    
+    while (curr) {
+        runningSum += curr.val;
+        prefixSumMap.set(runningSum, curr);
+        curr = curr.next;
+    }
+    
+    curr = dummy;
+    runningSum = 0;
+    
+    while (curr) {
+        runningSum += curr.val; 
+        curr.next = prefixSumMap.get(runningSum).next;
+        curr = curr.next; 
+    }
+    
+    return dummy.next;
 };
-  

@@ -1,20 +1,16 @@
-var searchRange = function(nums, target) {
-    let low = 0, high = nums.length-1, mid;
- 
-    while(low <= high) {
-        mid = Math.floor((low+high)/2);
-        if(nums[mid] >= target) high = mid-1;
-        else low = mid+1;
+var nextLargerNodes = function(head) {
+    let temparr=[];
+while(head){
+    temparr.push(head.val);
+    head=head.next
+}
+let res=new Uint32Array(temparr.length);
+let stack=[];
+for(let i=0;i<temparr.length;i++){
+    while(stack.length>0&&temparr[stack[stack.length-1]]<temparr[i]){
+        res[stack.pop()]=temparr[i]
     }
-    
-
-    if(nums[low] !== target) return [-1, -1];
-    const start = low;
-    low = 0, high = nums.length-1;
-    while(low <= high) {
-        mid = Math.floor((low+high)/2);
-        if(nums[mid] <= target) low = mid+1;
-        else high = mid-1;
-    }
-    return [start, high];
+    stack.push(i);
+}
+return res;
 };
