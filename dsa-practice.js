@@ -17,4 +17,8 @@
 //Q2 add two numbers
 
 
+let text = "Kiran";
+let letter = text.charAt(3);
+let output = text.replace(letter, "")
+console.log(output);
 
